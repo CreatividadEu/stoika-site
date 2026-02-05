@@ -62,17 +62,29 @@
         }
 
         .hero-image {
-            border-radius: 16px;
+            border-radius: 12px;
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.1);
             border: 1px solid rgba(0, 0, 0, 0.05);
+        }
+
+        @media (min-width: 768px) {
+            .hero-image {
+                border-radius: 16px;
+            }
         }
 
         .section-label {
             color: #737373;
             text-transform: uppercase;
             letter-spacing: 1.5px;
-            font-size: 12px;
+            font-size: 11px;
             font-weight: 600;
+        }
+
+        @media (min-width: 768px) {
+            .section-label {
+                font-size: 12px;
+            }
         }
 
         .price-card {
@@ -92,76 +104,126 @@
             opacity: 0.4;
             filter: grayscale(100%);
         }
+
+        /* Mobile menu styles */
+        .mobile-menu {
+            transform: translateX(100%);
+            transition: transform 0.3s ease;
+        }
+
+        .mobile-menu.open {
+            transform: translateX(0);
+        }
+
+        /* Toggle tabs scrollable on mobile */
+        .toggle-tabs {
+            -webkit-overflow-scrolling: touch;
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+        }
+
+        .toggle-tabs::-webkit-scrollbar {
+            display: none;
+        }
     </style>
 </head>
 <body>
     <!-- Navigation -->
     <nav class="sticky top-0 z-50 bg-white/80 backdrop-blur-lg border-b border-gray-100">
-        <div class="max-w-7xl mx-auto px-6 py-4">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 py-3 sm:py-4">
             <div class="flex items-center justify-between">
-                <div class="text-2xl font-bold">Stoika</div>
+                <div class="text-xl sm:text-2xl font-bold">Stoika</div>
+                
+                <!-- Desktop Navigation -->
                 <div class="hidden md:flex items-center gap-8">
                     <a href="#metodo" class="nav-link">Método</a>
                     <a href="#sistema" class="nav-link">Sistema OS</a>
                     <a href="#casos" class="nav-link">Casos</a>
                     <a href="#pricing" class="nav-link">Pricing</a>
                 </div>
-                <a href="#aplicar" class="bg-black text-white px-6 py-2.5 rounded-lg hover:bg-gray-800 transition-all font-medium">
+                
+                <!-- Mobile Menu Button -->
+                <button onclick="toggleMobileMenu()" class="md:hidden p-2 -mr-2">
+                    <svg id="menuIcon" class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                    </svg>
+                    <svg id="closeIcon" class="w-6 h-6 hidden" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                    </svg>
+                </button>
+                
+                <a href="#aplicar" class="hidden md:block bg-black text-white px-5 lg:px-6 py-2 sm:py-2.5 rounded-lg hover:bg-gray-800 transition-all font-medium text-sm sm:text-base">
                     Aplicar
                 </a>
             </div>
         </div>
+        
+        <!-- Mobile Menu -->
+        <div id="mobileMenu" class="mobile-menu fixed inset-y-0 right-0 w-64 bg-white shadow-xl z-50 md:hidden">
+            <div class="p-6 pt-20">
+                <div class="flex flex-col gap-6">
+                    <a href="#metodo" onclick="toggleMobileMenu()" class="text-lg font-medium">Método</a>
+                    <a href="#sistema" onclick="toggleMobileMenu()" class="text-lg font-medium">Sistema OS</a>
+                    <a href="#casos" onclick="toggleMobileMenu()" class="text-lg font-medium">Casos</a>
+                    <a href="#pricing" onclick="toggleMobileMenu()" class="text-lg font-medium">Pricing</a>
+                    <a href="#aplicar" onclick="toggleMobileMenu()" class="bg-black text-white px-6 py-3 rounded-lg text-center font-semibold mt-4">
+                        Aplicar
+                    </a>
+                </div>
+            </div>
+        </div>
+        <div id="menuOverlay" onclick="toggleMobileMenu()" class="fixed inset-0 bg-black/50 hidden md:hidden z-40"></div>
     </nav>
 
     <!-- Hero Section -->
-    <section class="gradient-bg pt-20 pb-32">
-        <div class="max-w-7xl mx-auto px-6">
+    <section class="gradient-bg pt-12 sm:pt-16 lg:pt-20 pb-16 sm:pb-24 lg:pb-32">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6">
             <div class="text-center max-w-4xl mx-auto">
-                <div class="inline-block mb-6">
-                    <span class="section-label bg-gray-100 px-4 py-2 rounded-full">
+                <div class="inline-block mb-4 sm:mb-6">
+                    <span class="section-label bg-gray-100 px-3 sm:px-4 py-1.5 sm:py-2 rounded-full">
                         Stoika Sprint™ (30D)
                     </span>
                 </div>
                 
-                <h1 class="text-6xl md:text-7xl font-bold mb-6 leading-tight">
-                    Rentabilidad Real <br/> en 30 días.
+                <h1 class="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold mb-4 sm:mb-6 leading-tight">
+                    Rentabilidad Real <br class="hidden sm:block"/> en 30 días.
                 </h1>
                 
-                <p class="text-xl md:text-2xl text-gray-600 mb-8 leading-relaxed max-w-3xl mx-auto">
-                    Nuestro programa mejora márgenes y libera caja.<br/>
+                <p class="text-lg sm:text-xl md:text-2xl text-gray-600 mb-6 sm:mb-8 leading-relaxed max-w-3xl mx-auto px-2">
+                    Nuestro programa mejora márgenes y libera caja.<br class="hidden sm:block"/>
                     <span class="text-gray-500">Sin humo. Sin teoría.</span>
                 </p>
 
-                <div class="flex flex-col sm:flex-row gap-4 justify-center mb-12">
-                    <a href="#aplicar" class="bg-black text-white px-8 py-4 rounded-lg hover:bg-gray-800 transition-all font-semibold text-lg">
+                <div class="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center mb-8 sm:mb-12 px-2">
+                    <a href="#aplicar" class="bg-black text-white px-6 sm:px-8 py-3.5 sm:py-4 rounded-lg hover:bg-gray-800 transition-all font-semibold text-base sm:text-lg">
                         Aplicar al Sprint
                     </a>
-                    <a href="#metodo" class="bg-white border-2 border-gray-200 text-black px-8 py-4 rounded-lg hover:border-gray-800 transition-all font-semibold text-lg">
+                    <a href="#metodo" class="bg-white border-2 border-gray-200 text-black px-6 sm:px-8 py-3.5 sm:py-4 rounded-lg hover:border-gray-800 transition-all font-semibold text-base sm:text-lg">
                         Ver el método
                     </a>
                 </div>
 
-                <p class="text-sm text-gray-500 mb-8">
-                   <strong> Más de 750 clientes confían en nosotros.</strong>
+                <p class="text-xs sm:text-sm text-gray-500 mb-6 sm:mb-8">
+                   <strong>Más de 750 clientes confían en nosotros.</strong>
                 </p>
 
                 <!-- Logo Strip Placeholder -->
-                <div class="logo-strip flex justify-center gap-8 mb-12 flex-wrap">
-                    <div class="bg-gray-200 h-10 w-24 rounded"></div>
-                    <div class="bg-gray-200 h-10 w-24 rounded"></div>
-                    <div class="bg-gray-200 h-10 w-24 rounded"></div>
-                    <div class="bg-gray-200 h-10 w-24 rounded"></div>
-                    <div class="bg-gray-200 h-10 w-24 rounded"></div>
+                <div class="logo-strip flex justify-center gap-4 sm:gap-8 mb-8 sm:mb-12 flex-wrap px-4">
+                    <div class="bg-gray-200 h-8 sm:h-10 w-16 sm:w-24 rounded"></div>
+                    <div class="bg-gray-200 h-8 sm:h-10 w-16 sm:w-24 rounded"></div>
+                    <div class="bg-gray-200 h-8 sm:h-10 w-16 sm:w-24 rounded hidden xs:block"></div>
+                    <div class="bg-gray-200 h-8 sm:h-10 w-16 sm:w-24 rounded hidden sm:block"></div>
+                    <div class="bg-gray-200 h-8 sm:h-10 w-16 sm:w-24 rounded hidden md:block"></div>
                 </div>
             </div>
 
             <!-- Hero Image -->
-            <div class="max-w-6xl mx-auto mt-16">
-                <div class="hero-image bg-gradient-to-br from-gray-100 to-gray-200 aspect-video flex items-center justify-center">
+            <div class="max-w-6xl mx-auto mt-8 sm:mt-12 lg:mt-16">
+                <div class="hero-image bg-gradient-to-br from-gray-100 to-gray-200 aspect-[4/3] sm:aspect-video flex items-center justify-center">
                     <div class="text-center">
-                        <div class="text-6xl mb-4">📊</div>
-                        <p class="text-gray-600 font-medium">Stoika OS™ Dashboard</p>
-                        <p class="text-sm text-gray-500">Panel + Simulador</p>
+                        <div class="text-4xl sm:text-5xl lg:text-6xl mb-3 sm:mb-4">📊</div>
+                        <p class="text-gray-600 font-medium text-sm sm:text-base">Stoika OS™ Dashboard</p>
+                        <p class="text-xs sm:text-sm text-gray-500">Panel + Simulador</p>
                     </div>
                 </div>
             </div>
@@ -169,47 +231,47 @@
     </section>
 
     <!-- Seamless Across Devices -->
-    <section id="sistema" class="py-24 bg-white">
-        <div class="max-w-7xl mx-auto px-6">
-            <div class="text-center mb-12">
-                <span class="section-label mb-4 block">Stoika OS™</span>
-                <h2 class="text-5xl md:text-6xl font-bold mb-6">
+    <section id="sistema" class="py-16 sm:py-20 lg:py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6">
+            <div class="text-center mb-8 sm:mb-12">
+                <span class="section-label mb-3 sm:mb-4 block">Stoika OS™</span>
+                <h2 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 sm:mb-6">
                     Your numbers. Live. Always.
                 </h2>
-                <p class="text-xl text-gray-600 max-w-3xl mx-auto">
-                    Stoika OS™ convierte datos simples de tu negocio en control real:<br/>
+                <p class="text-base sm:text-lg lg:text-xl text-gray-600 max-w-3xl mx-auto px-2">
+                    Stoika OS™ convierte datos simples de tu negocio en control real:
                     margen, EBITDA, caja liberada, palancas y progreso semanal.
                 </p>
             </div>
 
-            <!-- Toggle Tabs -->
-            <div class="flex justify-center gap-4 mb-12">
-                <button class="toggle-btn active px-6 py-3 rounded-lg font-semibold" onclick="toggleView('dashboard')">
+            <!-- Toggle Tabs - Scrollable on mobile -->
+            <div class="toggle-tabs flex gap-2 sm:gap-4 mb-8 sm:mb-12 overflow-x-auto pb-2 px-2 sm:justify-center">
+                <button class="toggle-btn active px-4 sm:px-6 py-2.5 sm:py-3 rounded-lg font-semibold text-sm sm:text-base whitespace-nowrap flex-shrink-0" onclick="toggleView('dashboard')">
                     Dashboard
                 </button>
-                <button class="toggle-btn px-6 py-3 rounded-lg font-semibold" onclick="toggleView('simulator')">
+                <button class="toggle-btn px-4 sm:px-6 py-2.5 sm:py-3 rounded-lg font-semibold text-sm sm:text-base whitespace-nowrap flex-shrink-0" onclick="toggleView('simulator')">
                     Scenario Simulator
                 </button>
-                <button class="toggle-btn px-6 py-3 rounded-lg font-semibold" onclick="toggleView('board')">
+                <button class="toggle-btn px-4 sm:px-6 py-2.5 sm:py-3 rounded-lg font-semibold text-sm sm:text-base whitespace-nowrap flex-shrink-0" onclick="toggleView('board')">
                     Execution Board
                 </button>
-                <button class="toggle-btn px-6 py-3 rounded-lg font-semibold" onclick="toggleView('score')">
+                <button class="toggle-btn px-4 sm:px-6 py-2.5 sm:py-3 rounded-lg font-semibold text-sm sm:text-base whitespace-nowrap flex-shrink-0" onclick="toggleView('score')">
                     Weekly Score
                 </button>
             </div>
 
             <!-- Mockup Display -->
             <div class="max-w-5xl mx-auto">
-                <div class="hero-image bg-gradient-to-br from-blue-50 to-purple-50 aspect-video flex items-center justify-center">
+                <div class="hero-image bg-gradient-to-br from-blue-50 to-purple-50 aspect-[4/3] sm:aspect-video flex items-center justify-center">
                     <div class="text-center">
-                        <div class="text-5xl mb-3">💼</div>
-                        <p class="text-gray-700 font-medium text-lg" id="view-title">Dashboard View</p>
+                        <div class="text-4xl sm:text-5xl mb-2 sm:mb-3">💼</div>
+                        <p class="text-gray-700 font-medium text-base sm:text-lg" id="view-title">Dashboard View</p>
                     </div>
                 </div>
             </div>
 
-            <div class="text-center mt-12">
-                <a href="#aplicar" class="inline-block bg-black text-white px-8 py-4 rounded-lg hover:bg-gray-800 transition-all font-semibold">
+            <div class="text-center mt-8 sm:mt-12">
+                <a href="#aplicar" class="inline-block bg-black text-white px-6 sm:px-8 py-3.5 sm:py-4 rounded-lg hover:bg-gray-800 transition-all font-semibold text-base sm:text-lg">
                     Aplicar al Sprint
                 </a>
             </div>
@@ -217,37 +279,37 @@
     </section>
 
     <!-- Feature Block 1: Profit System -->
-    <section id="metodo" class="py-24 bg-gray-50">
-        <div class="max-w-7xl mx-auto px-6">
-            <div class="grid md:grid-cols-2 gap-16 items-center">
-                <div>
-                    <span class="section-label mb-4 block">Profit System</span>
-                    <h2 class="text-5xl font-bold mb-6">
-                        Fix margin. Free cash.<br/>Build control.
+    <section id="metodo" class="py-16 sm:py-20 lg:py-24 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6">
+            <div class="grid lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-16 items-center">
+                <div class="order-2 lg:order-1">
+                    <span class="section-label mb-3 sm:mb-4 block">Profit System</span>
+                    <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 sm:mb-6">
+                        Fix margin. Free cash.<br class="hidden sm:block"/>Build control.
                     </h2>
-                    <p class="text-xl text-gray-600 mb-8">
+                    <p class="text-base sm:text-lg lg:text-xl text-gray-600 mb-6 sm:mb-8">
                         No se trata de vender más. Se trata de que el negocio deje utilidad real y te dé libertad.
                     </p>
 
                     <!-- Feature Chips -->
-                    <div class="flex flex-wrap gap-3 mb-8">
-                        <span class="feature-chip px-4 py-2 rounded-full text-sm font-medium">Pricing</span>
-                        <span class="feature-chip px-4 py-2 rounded-full text-sm font-medium">COGS</span>
-                        <span class="feature-chip px-4 py-2 rounded-full text-sm font-medium">Payroll</span>
-                        <span class="feature-chip px-4 py-2 rounded-full text-sm font-medium">OPEX</span>
-                        <span class="feature-chip px-4 py-2 rounded-full text-sm font-medium">Inventory</span>
-                        <span class="feature-chip px-4 py-2 rounded-full text-sm font-medium">Accounts receivable</span>
+                    <div class="flex flex-wrap gap-2 sm:gap-3 mb-6 sm:mb-8">
+                        <span class="feature-chip px-3 sm:px-4 py-1.5 sm:py-2 rounded-full text-xs sm:text-sm font-medium">Pricing</span>
+                        <span class="feature-chip px-3 sm:px-4 py-1.5 sm:py-2 rounded-full text-xs sm:text-sm font-medium">COGS</span>
+                        <span class="feature-chip px-3 sm:px-4 py-1.5 sm:py-2 rounded-full text-xs sm:text-sm font-medium">Payroll</span>
+                        <span class="feature-chip px-3 sm:px-4 py-1.5 sm:py-2 rounded-full text-xs sm:text-sm font-medium">OPEX</span>
+                        <span class="feature-chip px-3 sm:px-4 py-1.5 sm:py-2 rounded-full text-xs sm:text-sm font-medium">Inventory</span>
+                        <span class="feature-chip px-3 sm:px-4 py-1.5 sm:py-2 rounded-full text-xs sm:text-sm font-medium">Accounts receivable</span>
                     </div>
 
-                    <a href="#aplicar" class="inline-block bg-black text-white px-8 py-4 rounded-lg hover:bg-gray-800 transition-all font-semibold">
+                    <a href="#aplicar" class="inline-block bg-black text-white px-6 sm:px-8 py-3.5 sm:py-4 rounded-lg hover:bg-gray-800 transition-all font-semibold text-base sm:text-lg">
                         Aplicar al Sprint
                     </a>
                 </div>
 
-                <div>
+                <div class="order-1 lg:order-2">
                     <div class="hero-image bg-gradient-to-br from-green-50 to-emerald-50 aspect-square flex items-center justify-center">
                         <div class="text-center">
-                            <div class="text-6xl mb-4">📈</div>
+                            <div class="text-5xl sm:text-6xl mb-3 sm:mb-4">📈</div>
                             <p class="text-gray-700 font-medium">Profit Snapshot</p>
                         </div>
                     </div>
@@ -257,36 +319,36 @@
     </section>
 
     <!-- Feature Block 2: Cashflow -->
-    <section class="py-24 bg-white">
-        <div class="max-w-7xl mx-auto px-6">
-            <div class="grid md:grid-cols-2 gap-16 items-center">
-                <div class="order-2 md:order-1">
+    <section class="py-16 sm:py-20 lg:py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6">
+            <div class="grid lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-16 items-center">
+                <div class="order-1">
                     <div class="hero-image bg-gradient-to-br from-orange-50 to-red-50 aspect-square flex items-center justify-center">
                         <div class="text-center">
-                            <div class="text-6xl mb-4">💰</div>
+                            <div class="text-5xl sm:text-6xl mb-3 sm:mb-4">💰</div>
                             <p class="text-gray-700 font-medium">Cash Liberation</p>
                         </div>
                     </div>
                 </div>
 
-                <div class="order-1 md:order-2">
-                    <span class="section-label mb-4 block">Cashflow</span>
-                    <h2 class="text-5xl font-bold mb-6">
-                        Stop bleeding money<br/>invisibly.
+                <div class="order-2">
+                    <span class="section-label mb-3 sm:mb-4 block">Cashflow</span>
+                    <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 sm:mb-6">
+                        Stop bleeding money<br class="hidden sm:block"/>invisibly.
                     </h2>
-                    <p class="text-xl text-gray-600 mb-6">
+                    <p class="text-base sm:text-lg lg:text-xl text-gray-600 mb-4 sm:mb-6">
                         La mayoría de empresas pierden dinero en lugares que nadie mira: descuentos, desperdicio, baja productividad, compras mal hechas, inventario muerto.
                     </p>
-                    <p class="text-xl text-gray-600 mb-8">
+                    <p class="text-base sm:text-lg lg:text-xl text-gray-600 mb-6 sm:mb-8">
                         Stoika instala un sistema que lo vuelve visible… y accionable.
                     </p>
 
                     <!-- Feature Chips -->
-                    <div class="flex flex-wrap gap-3">
-                        <span class="feature-chip px-4 py-2 rounded-full text-sm font-medium">Cash liberation</span>
-                        <span class="feature-chip px-4 py-2 rounded-full text-sm font-medium">Leakage detection</span>
-                        <span class="feature-chip px-4 py-2 rounded-full text-sm font-medium">Weekly actions</span>
-                        <span class="feature-chip px-4 py-2 rounded-full text-sm font-medium">KPI tracking</span>
+                    <div class="flex flex-wrap gap-2 sm:gap-3">
+                        <span class="feature-chip px-3 sm:px-4 py-1.5 sm:py-2 rounded-full text-xs sm:text-sm font-medium">Cash liberation</span>
+                        <span class="feature-chip px-3 sm:px-4 py-1.5 sm:py-2 rounded-full text-xs sm:text-sm font-medium">Leakage detection</span>
+                        <span class="feature-chip px-3 sm:px-4 py-1.5 sm:py-2 rounded-full text-xs sm:text-sm font-medium">Weekly actions</span>
+                        <span class="feature-chip px-3 sm:px-4 py-1.5 sm:py-2 rounded-full text-xs sm:text-sm font-medium">KPI tracking</span>
                     </div>
                 </div>
             </div>
@@ -294,36 +356,36 @@
     </section>
 
     <!-- Feature Block 3: Execution -->
-    <section class="py-24 bg-gray-50">
-        <div class="max-w-7xl mx-auto px-6">
-            <div class="grid md:grid-cols-2 gap-16 items-center">
-                <div>
-                    <span class="section-label mb-4 block">Execution</span>
-                    <h2 class="text-5xl font-bold mb-6">
-                        A plan is useless<br/>without enforcement.
+    <section class="py-16 sm:py-20 lg:py-24 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6">
+            <div class="grid lg:grid-cols-2 gap-8 sm:gap-12 lg:gap-16 items-center">
+                <div class="order-2 lg:order-1">
+                    <span class="section-label mb-3 sm:mb-4 block">Execution</span>
+                    <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4 sm:mb-6">
+                        A plan is useless<br class="hidden sm:block"/>without enforcement.
                     </h2>
-                    <p class="text-xl text-gray-600 mb-8">
-                        Stoika no te deja "con ideas".<br/>
+                    <p class="text-base sm:text-lg lg:text-xl text-gray-600 mb-6 sm:mb-8">
+                        Stoika no te deja "con ideas".<br class="hidden sm:block"/>
                         Te deja con acciones priorizadas, responsables claros y una cadencia semanal que obliga avance.
                     </p>
 
                     <!-- Feature Chips -->
-                    <div class="flex flex-wrap gap-3 mb-8">
-                        <span class="feature-chip px-4 py-2 rounded-full text-sm font-medium">Operator cadences</span>
-                        <span class="feature-chip px-4 py-2 rounded-full text-sm font-medium">Accountability</span>
-                        <span class="feature-chip px-4 py-2 rounded-full text-sm font-medium">Weekly review</span>
-                        <span class="feature-chip px-4 py-2 rounded-full text-sm font-medium">Scorecard</span>
+                    <div class="flex flex-wrap gap-2 sm:gap-3 mb-6 sm:mb-8">
+                        <span class="feature-chip px-3 sm:px-4 py-1.5 sm:py-2 rounded-full text-xs sm:text-sm font-medium">Operator cadences</span>
+                        <span class="feature-chip px-3 sm:px-4 py-1.5 sm:py-2 rounded-full text-xs sm:text-sm font-medium">Accountability</span>
+                        <span class="feature-chip px-3 sm:px-4 py-1.5 sm:py-2 rounded-full text-xs sm:text-sm font-medium">Weekly review</span>
+                        <span class="feature-chip px-3 sm:px-4 py-1.5 sm:py-2 rounded-full text-xs sm:text-sm font-medium">Scorecard</span>
                     </div>
 
-                    <a href="#aplicar" class="inline-block bg-black text-white px-8 py-4 rounded-lg hover:bg-gray-800 transition-all font-semibold">
+                    <a href="#aplicar" class="inline-block bg-black text-white px-6 sm:px-8 py-3.5 sm:py-4 rounded-lg hover:bg-gray-800 transition-all font-semibold text-base sm:text-lg">
                         Aplicar
                     </a>
                 </div>
 
-                <div>
+                <div class="order-1 lg:order-2">
                     <div class="hero-image bg-gradient-to-br from-purple-50 to-pink-50 aspect-square flex items-center justify-center">
                         <div class="text-center">
-                            <div class="text-6xl mb-4">⚡</div>
+                            <div class="text-5xl sm:text-6xl mb-3 sm:mb-4">⚡</div>
                             <p class="text-gray-700 font-medium">Execution System</p>
                         </div>
                     </div>
@@ -333,103 +395,103 @@
     </section>
 
     <!-- Benefits -->
-    <section class="py-24 bg-white">
-        <div class="max-w-7xl mx-auto px-6">
-            <div class="text-center mb-16">
-                <h2 class="text-5xl md:text-6xl font-bold mb-4">
+    <section class="py-16 sm:py-20 lg:py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6">
+            <div class="text-center mb-10 sm:mb-16">
+                <h2 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4">
                     What you get in 30 days
                 </h2>
             </div>
 
-            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
                 <!-- Benefit Card 1 -->
-                <div class="glass-card p-8 rounded-2xl hover:shadow-lg transition-all">
-                    <div class="text-4xl mb-4">📊</div>
-                    <h3 class="text-2xl font-bold mb-3">Margin Lift</h3>
-                    <p class="text-gray-600">Aumenta margen con decisiones de pricing y COGS.</p>
+                <div class="glass-card p-6 sm:p-8 rounded-xl sm:rounded-2xl hover:shadow-lg transition-all">
+                    <div class="text-3xl sm:text-4xl mb-3 sm:mb-4">📊</div>
+                    <h3 class="text-xl sm:text-2xl font-bold mb-2 sm:mb-3">Margin Lift</h3>
+                    <p class="text-gray-600 text-sm sm:text-base">Aumenta margen con decisiones de pricing y COGS.</p>
                 </div>
 
                 <!-- Benefit Card 2 -->
-                <div class="glass-card p-8 rounded-2xl hover:shadow-lg transition-all">
-                    <div class="text-4xl mb-4">💎</div>
-                    <h3 class="text-2xl font-bold mb-3">EBITDA Upgrade</h3>
-                    <p class="text-gray-600">Recortamos grasa sin matar crecimiento.</p>
+                <div class="glass-card p-6 sm:p-8 rounded-xl sm:rounded-2xl hover:shadow-lg transition-all">
+                    <div class="text-3xl sm:text-4xl mb-3 sm:mb-4">💎</div>
+                    <h3 class="text-xl sm:text-2xl font-bold mb-2 sm:mb-3">EBITDA Upgrade</h3>
+                    <p class="text-gray-600 text-sm sm:text-base">Recortamos grasa sin matar crecimiento.</p>
                 </div>
 
                 <!-- Benefit Card 3 -->
-                <div class="glass-card p-8 rounded-2xl hover:shadow-lg transition-all">
-                    <div class="text-4xl mb-4">💰</div>
-                    <h3 class="text-2xl font-bold mb-3">Cash Liberation</h3>
-                    <p class="text-gray-600">Liberación de caja (inventario + cartera + eficiencia).</p>
+                <div class="glass-card p-6 sm:p-8 rounded-xl sm:rounded-2xl hover:shadow-lg transition-all">
+                    <div class="text-3xl sm:text-4xl mb-3 sm:mb-4">💰</div>
+                    <h3 class="text-xl sm:text-2xl font-bold mb-2 sm:mb-3">Cash Liberation</h3>
+                    <p class="text-gray-600 text-sm sm:text-base">Liberación de caja (inventario + cartera + eficiencia).</p>
                 </div>
 
                 <!-- Benefit Card 4 -->
-                <div class="glass-card p-8 rounded-2xl hover:shadow-lg transition-all">
-                    <div class="text-4xl mb-4">🎛️</div>
-                    <h3 class="text-2xl font-bold mb-3">Control OS</h3>
-                    <p class="text-gray-600">Panel vivo con números y progreso.</p>
+                <div class="glass-card p-6 sm:p-8 rounded-xl sm:rounded-2xl hover:shadow-lg transition-all">
+                    <div class="text-3xl sm:text-4xl mb-3 sm:mb-4">🎛️</div>
+                    <h3 class="text-xl sm:text-2xl font-bold mb-2 sm:mb-3">Control OS</h3>
+                    <p class="text-gray-600 text-sm sm:text-base">Panel vivo con números y progreso.</p>
                 </div>
 
                 <!-- Benefit Card 5 -->
-                <div class="glass-card p-8 rounded-2xl hover:shadow-lg transition-all">
-                    <div class="text-4xl mb-4">⚙️</div>
-                    <h3 class="text-2xl font-bold mb-3">Operator Discipline</h3>
-                    <p class="text-gray-600">Ritual semanal + tablero de ejecución.</p>
+                <div class="glass-card p-6 sm:p-8 rounded-xl sm:rounded-2xl hover:shadow-lg transition-all">
+                    <div class="text-3xl sm:text-4xl mb-3 sm:mb-4">⚙️</div>
+                    <h3 class="text-xl sm:text-2xl font-bold mb-2 sm:mb-3">Operator Discipline</h3>
+                    <p class="text-gray-600 text-sm sm:text-base">Ritual semanal + tablero de ejecución.</p>
                 </div>
 
                 <!-- Benefit Card 6 -->
-                <div class="glass-card p-8 rounded-2xl hover:shadow-lg transition-all">
-                    <div class="text-4xl mb-4">🚀</div>
-                    <h3 class="text-2xl font-bold mb-3">90-Day Expansion Plan</h3>
-                    <p class="text-gray-600">Sales con hoja de ruta para escalar.</p>
+                <div class="glass-card p-6 sm:p-8 rounded-xl sm:rounded-2xl hover:shadow-lg transition-all">
+                    <div class="text-3xl sm:text-4xl mb-3 sm:mb-4">🚀</div>
+                    <h3 class="text-xl sm:text-2xl font-bold mb-2 sm:mb-3">90-Day Expansion Plan</h3>
+                    <p class="text-gray-600 text-sm sm:text-base">Sales con hoja de ruta para escalar.</p>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Case Studies -->
-    <section id="casos" class="py-24 bg-gray-50">
-        <div class="max-w-7xl mx-auto px-6">
-            <div class="text-center mb-16">
-                <h2 class="text-5xl md:text-6xl font-bold mb-4">
+    <section id="casos" class="py-16 sm:py-20 lg:py-24 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6">
+            <div class="text-center mb-10 sm:mb-16">
+                <h2 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4">
                     Built for operators.
                 </h2>
             </div>
 
-            <div class="grid md:grid-cols-3 gap-8">
+            <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8">
                 <!-- Case 1 -->
-                <div class="bg-white rounded-2xl overflow-hidden hover:shadow-xl transition-all">
-                    <div class="bg-gradient-to-br from-blue-100 to-blue-200 h-48 flex items-center justify-center">
-                        <div class="text-5xl">👔</div>
+                <div class="bg-white rounded-xl sm:rounded-2xl overflow-hidden hover:shadow-xl transition-all">
+                    <div class="bg-gradient-to-br from-blue-100 to-blue-200 h-36 sm:h-48 flex items-center justify-center">
+                        <div class="text-4xl sm:text-5xl">👔</div>
                     </div>
-                    <div class="p-8">
+                    <div class="p-6 sm:p-8">
                         <span class="section-label">Retail / Moda</span>
-                        <h3 class="text-2xl font-bold mt-3 mb-3">Margen + Caja</h3>
-                        <p class="text-gray-600">Incremento del 18% en margen bruto y liberación de $45K en inventario.</p>
+                        <h3 class="text-xl sm:text-2xl font-bold mt-2 sm:mt-3 mb-2 sm:mb-3">Margen + Caja</h3>
+                        <p class="text-gray-600 text-sm sm:text-base">Incremento del 18% en margen bruto y liberación de $45K en inventario.</p>
                     </div>
                 </div>
 
                 <!-- Case 2 -->
-                <div class="bg-white rounded-2xl overflow-hidden hover:shadow-xl transition-all">
-                    <div class="bg-gradient-to-br from-orange-100 to-orange-200 h-48 flex items-center justify-center">
-                        <div class="text-5xl">🍽️</div>
+                <div class="bg-white rounded-xl sm:rounded-2xl overflow-hidden hover:shadow-xl transition-all">
+                    <div class="bg-gradient-to-br from-orange-100 to-orange-200 h-36 sm:h-48 flex items-center justify-center">
+                        <div class="text-4xl sm:text-5xl">🍽️</div>
                     </div>
-                    <div class="p-8">
+                    <div class="p-6 sm:p-8">
                         <span class="section-label">Hospitality</span>
-                        <h3 class="text-2xl font-bold mt-3 mb-3">EBITDA sin más horas</h3>
-                        <p class="text-gray-600">12% EBITDA mejora sin aumentar horas del fundador.</p>
+                        <h3 class="text-xl sm:text-2xl font-bold mt-2 sm:mt-3 mb-2 sm:mb-3">EBITDA sin más horas</h3>
+                        <p class="text-gray-600 text-sm sm:text-base">12% EBITDA mejora sin aumentar horas del fundador.</p>
                     </div>
                 </div>
 
                 <!-- Case 3 -->
-                <div class="bg-white rounded-2xl overflow-hidden hover:shadow-xl transition-all">
-                    <div class="bg-gradient-to-br from-green-100 to-green-200 h-48 flex items-center justify-center">
-                        <div class="text-5xl">💆</div>
+                <div class="bg-white rounded-xl sm:rounded-2xl overflow-hidden hover:shadow-xl transition-all sm:col-span-2 lg:col-span-1">
+                    <div class="bg-gradient-to-br from-green-100 to-green-200 h-36 sm:h-48 flex items-center justify-center">
+                        <div class="text-4xl sm:text-5xl">💆</div>
                     </div>
-                    <div class="p-8">
+                    <div class="p-6 sm:p-8">
                         <span class="section-label">Salud / Estética</span>
-                        <h3 class="text-2xl font-bold mt-3 mb-3">Conversión + Paquetes</h3>
-                        <p class="text-gray-600">+28% conversión con sistema de paquetes y cobro estructurado.</p>
+                        <h3 class="text-xl sm:text-2xl font-bold mt-2 sm:mt-3 mb-2 sm:mb-3">Conversión + Paquetes</h3>
+                        <p class="text-gray-600 text-sm sm:text-base">+28% conversión con sistema de paquetes y cobro estructurado.</p>
                     </div>
                 </div>
             </div>
@@ -437,127 +499,127 @@
     </section>
 
     <!-- Pricing -->
-    <section id="pricing" class="py-24 bg-white">
-        <div class="max-w-7xl mx-auto px-6">
-            <div class="text-center mb-16">
-                <h2 class="text-5xl md:text-6xl font-bold mb-4">
+    <section id="pricing" class="py-16 sm:py-20 lg:py-24 bg-white">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6">
+            <div class="text-center mb-10 sm:mb-16">
+                <h2 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4">
                     Choose your level of execution.
                 </h2>
             </div>
 
-            <div class="grid md:grid-cols-3 gap-8 max-w-6xl mx-auto">
+            <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 lg:gap-8 max-w-6xl mx-auto">
                 <!-- Diagnostic -->
-                <div class="price-card glass-card p-8 rounded-2xl">
-                    <h3 class="text-2xl font-bold mb-2">Diagnostic</h3>
-                    <p class="text-gray-600 mb-6">Scorecard + análisis + plan</p>
-                    <div class="mb-6">
-                        <span class="text-sm text-gray-500">90 min</span>
+                <div class="price-card glass-card p-6 sm:p-8 rounded-xl sm:rounded-2xl">
+                    <h3 class="text-xl sm:text-2xl font-bold mb-2">Diagnostic</h3>
+                    <p class="text-gray-600 mb-4 sm:mb-6 text-sm sm:text-base">Scorecard + análisis + plan</p>
+                    <div class="mb-4 sm:mb-6">
+                        <span class="text-xs sm:text-sm text-gray-500">90 min</span>
                     </div>
-                    <a href="#aplicar" class="block w-full text-center bg-gray-100 text-black px-6 py-3 rounded-lg hover:bg-gray-200 transition-all font-semibold">
+                    <a href="#aplicar" class="block w-full text-center bg-gray-100 text-black px-4 sm:px-6 py-2.5 sm:py-3 rounded-lg hover:bg-gray-200 transition-all font-semibold text-sm sm:text-base">
                         Solicitar diagnóstico
                     </a>
                 </div>
 
                 <!-- Stoika Sprint (Recommended) -->
-                <div class="price-card bg-black text-white p-8 rounded-2xl relative">
-                    <div class="absolute -top-4 left-1/2 transform -translate-x-1/2">
-                        <span class="bg-white text-black px-4 py-1 rounded-full text-sm font-semibold">
+                <div class="price-card bg-black text-white p-6 sm:p-8 rounded-xl sm:rounded-2xl relative sm:col-span-2 lg:col-span-1">
+                    <div class="absolute -top-3 sm:-top-4 left-1/2 transform -translate-x-1/2">
+                        <span class="bg-white text-black px-3 sm:px-4 py-1 rounded-full text-xs sm:text-sm font-semibold">
                             Recommended
                         </span>
                     </div>
-                    <h3 class="text-2xl font-bold mb-2">Stoika Sprint™</h3>
-                    <p class="text-gray-300 mb-6">Stoika OS™ + Simulador + tablero</p>
-                    <div class="mb-6">
-                        <span class="text-sm text-gray-400">4 semanas, ejecución real</span>
+                    <h3 class="text-xl sm:text-2xl font-bold mb-2 mt-2 sm:mt-0">Stoika Sprint™</h3>
+                    <p class="text-gray-300 mb-4 sm:mb-6 text-sm sm:text-base">Stoika OS™ + Simulador + tablero</p>
+                    <div class="mb-4 sm:mb-6">
+                        <span class="text-xs sm:text-sm text-gray-400">4 semanas, ejecución real</span>
                     </div>
-                    <a href="#aplicar" class="block w-full text-center bg-white text-black px-6 py-3 rounded-lg hover:bg-gray-100 transition-all font-semibold">
+                    <a href="#aplicar" class="block w-full text-center bg-white text-black px-4 sm:px-6 py-2.5 sm:py-3 rounded-lg hover:bg-gray-100 transition-all font-semibold text-sm sm:text-base">
                         Aplicar al Sprint
                     </a>
                 </div>
 
                 <!-- Implementation -->
-                <div class="price-card glass-card p-8 rounded-2xl">
-                    <h3 class="text-2xl font-bold mb-2">Stoika Implementation</h3>
-                    <p class="text-gray-600 mb-6">Implementamos palancas con tu equipo</p>
-                    <div class="mb-6">
-                        <span class="text-sm text-gray-500">SOPs + automatizaciones + marketing ops</span>
+                <div class="price-card glass-card p-6 sm:p-8 rounded-xl sm:rounded-2xl">
+                    <h3 class="text-xl sm:text-2xl font-bold mb-2">Stoika Implementation</h3>
+                    <p class="text-gray-600 mb-4 sm:mb-6 text-sm sm:text-base">Implementamos palancas con tu equipo</p>
+                    <div class="mb-4 sm:mb-6">
+                        <span class="text-xs sm:text-sm text-gray-500">SOPs + automatizaciones + marketing ops</span>
                     </div>
-                    <a href="#aplicar" class="block w-full text-center bg-gray-100 text-black px-6 py-3 rounded-lg hover:bg-gray-200 transition-all font-semibold">
+                    <a href="#aplicar" class="block w-full text-center bg-gray-100 text-black px-4 sm:px-6 py-2.5 sm:py-3 rounded-lg hover:bg-gray-200 transition-all font-semibold text-sm sm:text-base">
                         Agendar llamada
                     </a>
                 </div>
             </div>
 
-            <p class="text-center text-sm text-gray-500 mt-8">
+            <p class="text-center text-xs sm:text-sm text-gray-500 mt-6 sm:mt-8">
                 Aplicación obligatoria / cupos limitados por ejecución
             </p>
         </div>
     </section>
 
     <!-- FAQ -->
-    <section class="py-24 bg-gray-50">
-        <div class="max-w-4xl mx-auto px-6">
-            <div class="text-center mb-16">
-                <h2 class="text-5xl font-bold mb-4">Preguntas frecuentes</h2>
+    <section class="py-16 sm:py-20 lg:py-24 bg-gray-50">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6">
+            <div class="text-center mb-10 sm:mb-16">
+                <h2 class="text-3xl sm:text-4xl lg:text-5xl font-bold mb-4">Preguntas frecuentes</h2>
             </div>
 
             <div class="space-y-0">
-                <div class="faq-item py-6">
+                <div class="faq-item py-4 sm:py-6">
                     <button class="w-full flex justify-between items-start text-left" onclick="toggleFAQ(this)">
-                        <span class="text-xl font-semibold pr-8">¿Para quién es?</span>
-                        <span class="text-2xl">+</span>
+                        <span class="text-base sm:text-xl font-semibold pr-4 sm:pr-8">¿Para quién es?</span>
+                        <span class="text-xl sm:text-2xl flex-shrink-0">+</span>
                     </button>
-                    <div class="faq-content hidden mt-4 text-gray-600">
+                    <div class="faq-content hidden mt-3 sm:mt-4 text-gray-600 text-sm sm:text-base">
                         Para fundadores y operadores de negocios establecidos (>$30K/mes en ventas) que necesitan estructura, rentabilidad y control sin depender de teoría o consultores externos.
                     </div>
                 </div>
 
-                <div class="faq-item py-6">
+                <div class="faq-item py-4 sm:py-6">
                     <button class="w-full flex justify-between items-start text-left" onclick="toggleFAQ(this)">
-                        <span class="text-xl font-semibold pr-8">¿Cuánto tiempo toma?</span>
-                        <span class="text-2xl">+</span>
+                        <span class="text-base sm:text-xl font-semibold pr-4 sm:pr-8">¿Cuánto tiempo toma?</span>
+                        <span class="text-xl sm:text-2xl flex-shrink-0">+</span>
                     </button>
-                    <div class="faq-content hidden mt-4 text-gray-600">
+                    <div class="faq-content hidden mt-3 sm:mt-4 text-gray-600 text-sm sm:text-base">
                         El Sprint es de 30 días intensivos. Esperamos 4-6 horas de tu tiempo por semana entre reuniones, implementación y revisión de datos.
                     </div>
                 </div>
 
-                <div class="faq-item py-6">
+                <div class="faq-item py-4 sm:py-6">
                     <button class="w-full flex justify-between items-start text-left" onclick="toggleFAQ(this)">
-                        <span class="text-xl font-semibold pr-8">¿Necesito cifras perfectas?</span>
-                        <span class="text-2xl">+</span>
+                        <span class="text-base sm:text-xl font-semibold pr-4 sm:pr-8">¿Necesito cifras perfectas?</span>
+                        <span class="text-xl sm:text-2xl flex-shrink-0">+</span>
                     </button>
-                    <div class="faq-content hidden mt-4 text-gray-600">
+                    <div class="faq-content hidden mt-3 sm:mt-4 text-gray-600 text-sm sm:text-base">
                         No. Necesitas datos básicos: ventas, costos principales, gastos operativos. Stoika te ayuda a ordenar y estructurar el resto durante el proceso.
                     </div>
                 </div>
 
-                <div class="faq-item py-6">
+                <div class="faq-item py-4 sm:py-6">
                     <button class="w-full flex justify-between items-start text-left" onclick="toggleFAQ(this)">
-                        <span class="text-xl font-semibold pr-8">¿Esto es consultoría?</span>
-                        <span class="text-2xl">+</span>
+                        <span class="text-base sm:text-xl font-semibold pr-4 sm:pr-8">¿Esto es consultoría?</span>
+                        <span class="text-xl sm:text-2xl flex-shrink-0">+</span>
                     </button>
-                    <div class="faq-content hidden mt-4 text-gray-600">
+                    <div class="faq-content hidden mt-3 sm:mt-4 text-gray-600 text-sm sm:text-base">
                         No es consultoría tradicional. Es implementación hands-on con sistema y software incluido. No te damos un PowerPoint, te dejamos con un sistema funcionando.
                     </div>
                 </div>
 
-                <div class="faq-item py-6">
+                <div class="faq-item py-4 sm:py-6">
                     <button class="w-full flex justify-between items-start text-left" onclick="toggleFAQ(this)">
-                        <span class="text-xl font-semibold pr-8">¿Garantías?</span>
-                        <span class="text-2xl">+</span>
+                        <span class="text-base sm:text-xl font-semibold pr-4 sm:pr-8">¿Garantías?</span>
+                        <span class="text-xl sm:text-2xl flex-shrink-0">+</span>
                     </button>
-                    <div class="faq-content hidden mt-4 text-gray-600">
+                    <div class="faq-content hidden mt-3 sm:mt-4 text-gray-600 text-sm sm:text-base">
                         Si ejecutas todo el Sprint y no identificamos al menos 3 palancas accionables de mejora en margen o caja, te devolvemos el 100% del programa.
                     </div>
                 </div>
 
-                <div class="faq-item py-6">
+                <div class="faq-item py-4 sm:py-6">
                     <button class="w-full flex justify-between items-start text-left" onclick="toggleFAQ(this)">
-                        <span class="text-xl font-semibold pr-8">¿Qué pasa después del Sprint?</span>
-                        <span class="text-2xl">+</span>
+                        <span class="text-base sm:text-xl font-semibold pr-4 sm:pr-8">¿Qué pasa después del Sprint?</span>
+                        <span class="text-xl sm:text-2xl flex-shrink-0">+</span>
                     </button>
-                    <div class="faq-content hidden mt-4 text-gray-600">
+                    <div class="faq-content hidden mt-3 sm:mt-4 text-gray-600 text-sm sm:text-base">
                         Recibes el roadmap de 90 días y acceso continuo a Stoika OS. Puedes continuar solo o pasar a Implementation para ejecutar palancas más complejas con nuestro equipo.
                     </div>
                 </div>
@@ -566,16 +628,16 @@
     </section>
 
     <!-- Final CTA -->
-    <section id="aplicar" class="py-24 bg-black text-white">
-        <div class="max-w-4xl mx-auto px-6 text-center">
-            <h2 class="text-5xl md:text-6xl font-bold mb-6">
-                Ready to run your business<br/>like an operator?
+    <section id="aplicar" class="py-16 sm:py-20 lg:py-24 bg-black text-white">
+        <div class="max-w-4xl mx-auto px-4 sm:px-6 text-center">
+            <h2 class="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-4 sm:mb-6">
+                Ready to run your business<br class="hidden sm:block"/>like an operator?
             </h2>
-            <p class="text-xl text-gray-300 mb-12 max-w-2xl mx-auto">
-                Si tu negocio vende, pero no te deja libertad, necesitas sistema.<br/>
+            <p class="text-base sm:text-lg lg:text-xl text-gray-300 mb-8 sm:mb-12 max-w-2xl mx-auto">
+                Si tu negocio vende, pero no te deja libertad, necesitas sistema.
                 Stoika instala control y convierte caos en ejecución.
             </p>
-            <button onclick="showForm()" class="bg-white text-black px-10 py-5 rounded-lg hover:bg-gray-100 transition-all font-bold text-lg">
+            <button onclick="showForm()" class="bg-white text-black px-8 sm:px-10 py-4 sm:py-5 rounded-lg hover:bg-gray-100 transition-all font-bold text-base sm:text-lg w-full sm:w-auto">
                 Aplicar al Stoika Sprint™
             </button>
         </div>
@@ -583,32 +645,32 @@
 
     <!-- Application Form Modal -->
     <div id="formModal" class="fixed inset-0 bg-black/50 backdrop-blur-sm hidden items-center justify-center z-50 p-4">
-        <div class="bg-white rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
-            <div class="p-8">
-                <div class="flex justify-between items-start mb-6">
-                    <h3 class="text-3xl font-bold">Aplicación Stoika Sprint™</h3>
-                    <button onclick="hideForm()" class="text-gray-400 hover:text-gray-600 text-2xl">×</button>
+        <div class="bg-white rounded-xl sm:rounded-2xl max-w-2xl w-full max-h-[90vh] overflow-y-auto">
+            <div class="p-5 sm:p-8">
+                <div class="flex justify-between items-start mb-4 sm:mb-6">
+                    <h3 class="text-2xl sm:text-3xl font-bold">Aplicación Stoika Sprint™</h3>
+                    <button onclick="hideForm()" class="text-gray-400 hover:text-gray-600 text-2xl p-1">×</button>
                 </div>
 
-                <form id="applicationForm" class="space-y-6">
+                <form id="applicationForm" class="space-y-4 sm:space-y-6">
                     <div>
-                        <label class="block text-sm font-semibold mb-2">Nombre completo</label>
-                        <input type="text" required class="w-full px-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:border-black">
+                        <label class="block text-sm font-semibold mb-1.5 sm:mb-2">Nombre completo</label>
+                        <input type="text" required class="w-full px-3 sm:px-4 py-2.5 sm:py-3 border border-gray-200 rounded-lg focus:outline-none focus:border-black text-base">
                     </div>
 
                     <div>
-                        <label class="block text-sm font-semibold mb-2">Empresa</label>
-                        <input type="text" required class="w-full px-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:border-black">
+                        <label class="block text-sm font-semibold mb-1.5 sm:mb-2">Empresa</label>
+                        <input type="text" required class="w-full px-3 sm:px-4 py-2.5 sm:py-3 border border-gray-200 rounded-lg focus:outline-none focus:border-black text-base">
                     </div>
 
                     <div>
-                        <label class="block text-sm font-semibold mb-2">País</label>
-                        <input type="text" required class="w-full px-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:border-black">
+                        <label class="block text-sm font-semibold mb-1.5 sm:mb-2">País</label>
+                        <input type="text" required class="w-full px-3 sm:px-4 py-2.5 sm:py-3 border border-gray-200 rounded-lg focus:outline-none focus:border-black text-base">
                     </div>
 
                     <div>
-                        <label class="block text-sm font-semibold mb-2">Ventas mensuales aprox.</label>
-                        <select required class="w-full px-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:border-black">
+                        <label class="block text-sm font-semibold mb-1.5 sm:mb-2">Ventas mensuales aprox.</label>
+                        <select required class="w-full px-3 sm:px-4 py-2.5 sm:py-3 border border-gray-200 rounded-lg focus:outline-none focus:border-black text-base bg-white">
                             <option value="">Selecciona un rango</option>
                             <option value="30-50k">$30K - $50K</option>
                             <option value="50-100k">$50K - $100K</option>
@@ -618,13 +680,13 @@
                     </div>
 
                     <div>
-                        <label class="block text-sm font-semibold mb-2">Margen bruto estimado (%)</label>
-                        <input type="number" required min="0" max="100" class="w-full px-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:border-black">
+                        <label class="block text-sm font-semibold mb-1.5 sm:mb-2">Margen bruto estimado (%)</label>
+                        <input type="number" required min="0" max="100" class="w-full px-3 sm:px-4 py-2.5 sm:py-3 border border-gray-200 rounded-lg focus:outline-none focus:border-black text-base">
                     </div>
 
                     <div>
-                        <label class="block text-sm font-semibold mb-2">Principal cuello de botella</label>
-                        <select required class="w-full px-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:border-black">
+                        <label class="block text-sm font-semibold mb-1.5 sm:mb-2">Principal cuello de botella</label>
+                        <select required class="w-full px-3 sm:px-4 py-2.5 sm:py-3 border border-gray-200 rounded-lg focus:outline-none focus:border-black text-base bg-white">
                             <option value="">Selecciona uno</option>
                             <option value="margin">Márgenes bajos</option>
                             <option value="cashflow">Problemas de caja</option>
@@ -636,33 +698,33 @@
                     </div>
 
                     <div>
-                        <label class="block text-sm font-semibold mb-2">WhatsApp</label>
-                        <input type="tel" required class="w-full px-4 py-3 border border-gray-200 rounded-lg focus:outline-none focus:border-black" placeholder="+57 300 123 4567">
+                        <label class="block text-sm font-semibold mb-1.5 sm:mb-2">WhatsApp</label>
+                        <input type="tel" required class="w-full px-3 sm:px-4 py-2.5 sm:py-3 border border-gray-200 rounded-lg focus:outline-none focus:border-black text-base" placeholder="+57 300 123 4567">
                     </div>
 
                     <div>
-                        <label class="block text-sm font-semibold mb-2">¿Estás listo para ejecutar cambios en 30 días?</label>
+                        <label class="block text-sm font-semibold mb-1.5 sm:mb-2">¿Estás listo para ejecutar cambios en 30 días?</label>
                         <div class="flex gap-6">
                             <label class="flex items-center">
-                                <input type="radio" name="ready" value="yes" required class="mr-2">
+                                <input type="radio" name="ready" value="yes" required class="mr-2 w-4 h-4">
                                 <span>Sí</span>
                             </label>
                             <label class="flex items-center">
-                                <input type="radio" name="ready" value="no" required class="mr-2">
+                                <input type="radio" name="ready" value="no" required class="mr-2 w-4 h-4">
                                 <span>No</span>
                             </label>
                         </div>
                     </div>
 
-                    <button type="submit" class="w-full bg-black text-white px-8 py-4 rounded-lg hover:bg-gray-800 transition-all font-bold text-lg">
+                    <button type="submit" class="w-full bg-black text-white px-6 sm:px-8 py-3.5 sm:py-4 rounded-lg hover:bg-gray-800 transition-all font-bold text-base sm:text-lg">
                         Enviar aplicación
                     </button>
                 </form>
 
-                <div id="successMessage" class="hidden text-center py-12">
-                    <div class="text-5xl mb-4">✅</div>
-                    <h4 class="text-2xl font-bold mb-3">¡Perfecto!</h4>
-                    <p class="text-gray-600">
+                <div id="successMessage" class="hidden text-center py-8 sm:py-12">
+                    <div class="text-4xl sm:text-5xl mb-3 sm:mb-4">✅</div>
+                    <h4 class="text-xl sm:text-2xl font-bold mb-2 sm:mb-3">¡Perfecto!</h4>
+                    <p class="text-gray-600 text-sm sm:text-base">
                         Revisaremos tu aplicación y si calificas,<br/>te enviaremos el link para agenda.
                     </p>
                 </div>
@@ -671,45 +733,60 @@
     </div>
 
     <!-- Footer -->
-    <footer class="bg-white border-t border-gray-100 py-12">
-        <div class="max-w-7xl mx-auto px-6">
-            <div class="grid md:grid-cols-4 gap-8">
-                <div>
-                    <div class="text-2xl font-bold mb-4">Stoika</div>
-                    <p class="text-gray-600 text-sm">
+    <footer class="bg-white border-t border-gray-100 py-8 sm:py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6">
+            <div class="grid grid-cols-2 sm:grid-cols-4 gap-6 sm:gap-8">
+                <div class="col-span-2 sm:col-span-1">
+                    <div class="text-xl sm:text-2xl font-bold mb-3 sm:mb-4">Stoika</div>
+                    <p class="text-gray-600 text-xs sm:text-sm">
                         Sistema de rentabilidad y control para operadores.
                     </p>
                 </div>
                 <div>
-                    <h4 class="font-semibold mb-4">Producto</h4>
-                    <ul class="space-y-2 text-sm text-gray-600">
+                    <h4 class="font-semibold mb-3 sm:mb-4 text-sm sm:text-base">Producto</h4>
+                    <ul class="space-y-1.5 sm:space-y-2 text-xs sm:text-sm text-gray-600">
                         <li><a href="#metodo" class="hover:text-black">Método</a></li>
                         <li><a href="#sistema" class="hover:text-black">Sistema OS</a></li>
                         <li><a href="#casos" class="hover:text-black">Casos</a></li>
                     </ul>
                 </div>
                 <div>
-                    <h4 class="font-semibold mb-4">Empresa</h4>
-                    <ul class="space-y-2 text-sm text-gray-600">
+                    <h4 class="font-semibold mb-3 sm:mb-4 text-sm sm:text-base">Empresa</h4>
+                    <ul class="space-y-1.5 sm:space-y-2 text-xs sm:text-sm text-gray-600">
                         <li><a href="#" class="hover:text-black">Sobre nosotros</a></li>
                         <li><a href="#" class="hover:text-black">Contacto</a></li>
                     </ul>
                 </div>
                 <div>
-                    <h4 class="font-semibold mb-4">Legal</h4>
-                    <ul class="space-y-2 text-sm text-gray-600">
+                    <h4 class="font-semibold mb-3 sm:mb-4 text-sm sm:text-base">Legal</h4>
+                    <ul class="space-y-1.5 sm:space-y-2 text-xs sm:text-sm text-gray-600">
                         <li><a href="#" class="hover:text-black">Términos</a></li>
                         <li><a href="#" class="hover:text-black">Privacidad</a></li>
                     </ul>
                 </div>
             </div>
-            <div class="border-t border-gray-100 mt-8 pt-8 text-center text-sm text-gray-500">
+            <div class="border-t border-gray-100 mt-6 sm:mt-8 pt-6 sm:pt-8 text-center text-xs sm:text-sm text-gray-500">
                 © 2025 Stoika. All rights reserved.
             </div>
         </div>
     </footer>
 
     <script>
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobileMenu');
+            const overlay = document.getElementById('menuOverlay');
+            const menuIcon = document.getElementById('menuIcon');
+            const closeIcon = document.getElementById('closeIcon');
+            
+            menu.classList.toggle('open');
+            overlay.classList.toggle('hidden');
+            menuIcon.classList.toggle('hidden');
+            closeIcon.classList.toggle('hidden');
+            
+            // Prevent body scroll when menu is open
+            document.body.style.overflow = menu.classList.contains('open') ? 'hidden' : '';
+        }
+
         function toggleView(view) {
             const buttons = document.querySelectorAll('.toggle-btn');
             buttons.forEach(btn => btn.classList.remove('active'));
@@ -736,11 +813,13 @@
         function showForm() {
             document.getElementById('formModal').classList.remove('hidden');
             document.getElementById('formModal').classList.add('flex');
+            document.body.style.overflow = 'hidden';
         }
 
         function hideForm() {
             document.getElementById('formModal').classList.add('hidden');
             document.getElementById('formModal').classList.remove('flex');
+            document.body.style.overflow = '';
         }
 
         document.getElementById('applicationForm').addEventListener('submit', function(e) {
@@ -760,6 +839,13 @@
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
+                
+                // Close mobile menu if open
+                const menu = document.getElementById('mobileMenu');
+                if (menu.classList.contains('open')) {
+                    toggleMobileMenu();
+                }
+                
                 const target = document.querySelector(this.getAttribute('href'));
                 if (target) {
                     target.scrollIntoView({
@@ -768,6 +854,16 @@
                     });
                 }
             });
+        });
+
+        // Close modal on escape key
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') {
+                hideForm();
+                if (document.getElementById('mobileMenu').classList.contains('open')) {
+                    toggleMobileMenu();
+                }
+            }
         });
     </script>
 </body>
