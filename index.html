@@ -125,6 +125,43 @@
         .toggle-tabs::-webkit-scrollbar {
             display: none;
         }
+
+        /* Logo Carousel Animation */
+            .logo-carousel-container {
+                position: relative;
+                width: 100%;
+        }
+
+            .logo-carousel {
+            display: flex;
+            animation: scroll-logos 30s linear infinite;
+            will-change: transform;
+        }
+
+            .logo-carousel:hover {
+             animation-play-state: paused;
+        }
+
+        @keyframes scroll-logos {
+        0% {
+        transform: translateX(0);
+            }
+        100% {
+        transform: translateX(-50%);
+            }
+        }
+
+        .logo-item {
+        opacity: 0.4;
+        filter: grayscale(100%);
+        transition: all 0.3s ease;
+        }
+
+        .logo-item:hover {
+            opacity: 0.7;
+            filter: grayscale(0%);
+        }
+
     </style>
 </head>
 <body>
@@ -208,16 +245,26 @@
                 </p>
 
                 <!-- Logo Strip Placeholder -->
-              <!-- Logo Strip -->
-                <div class="logo-strip flex justify-center gap-4 sm:gap-8 mb-8 sm:mb-12 flex-wrap px-4 items-center">
-                    <img src="images/logo_andres.svg" alt="Andres" class="h-14 sm:h-16 object-contain">
-                    <img src="images/logo_bid.svg" alt="BID" class="h-14 sm:h-16 object-contain">
-                     <img src="images/logo_mercado_libre.svg" alt="Mercado Libre" class="h-14 sm:h-16 object-contain hidden xs:block">
-                    <img src="images/logo_nutresa.svg" alt="Nutresa" class="h-14 sm:h-16 object-contain hidden sm:block">
-                    <img src="images/logo_sodexo.svg" alt="Sodexo" class="h-14 sm:h-16 object-contain hidden md:block">
-                    <img src="images/logo_subway.svg" alt="Subway" class="h-14 sm:h-16 object-contain">
-                </div>
-            </div>
+                <!-- Logo Strip -->
+                    <div class="logo-carousel-container overflow-hidden mb-8 sm:mb-12">
+                    <div class="logo-carousel flex items-center gap-8 sm:gap-12">
+                         <!-- Primera serie de logos -->
+                        <img src="images/logo_andres.svg" alt="Andres" class="logo-item h-14 sm:h-16 object-contain flex-shrink-0">
+                        <img src="images/logo_bid.svg" alt="BID" class="logo-item h-14 sm:h-16 object-contain flex-shrink-0">
+                        <img src="images/logo_mercado_libre.svg" alt="Mercado Libre" class="logo-item h-14 sm:h-16 object-contain flex-shrink-0">
+                        <img src="images/logo_nutresa.svg" alt="Nutresa" class="logo-item h-14 sm:h-16 object-contain flex-shrink-0">
+                        <img src="images/logo_sodexo.svg" alt="Sodexo" class="logo-item h-14 sm:h-16 object-contain flex-shrink-0">
+                        <img src="images/logo_subway.svg" alt="Subway" class="logo-item h-14 sm:h-16 object-contain flex-shrink-0">
+        
+                <!-- Segunda serie (duplicada para efecto infinito) -->
+                        <img src="images/logo_andres.svg" alt="Andres" class="logo-item h-14 sm:h-16 object-contain flex-shrink-0">
+                        <img src="images/logo_bid.svg" alt="BID" class="logo-item h-14 sm:h-16 object-contain flex-shrink-0">
+                        <img src="images/logo_mercado_libre.svg" alt="Mercado Libre" class="logo-item h-14 sm:h-16 object-contain flex-shrink-0">
+                        <img src="images/logo_nutresa.svg" alt="Nutresa" class="logo-item h-14 sm:h-16 object-contain flex-shrink-0">
+                        <img src="images/logo_sodexo.svg" alt="Sodexo" class="logo-item h-14 sm:h-16 object-contain flex-shrink-0">
+                        <img src="images/logo_subway.svg" alt="Subway" class="logo-item h-14 sm:h-16 object-contain flex-shrink-0">
+                    </div>
+                    </div>
 
             <!-- Hero Image -->
             <div class="max-w-6xl mx-auto mt-8 sm:mt-12 lg:mt-16">
