@@ -127,40 +127,40 @@
         }
 
         /* Logo Carousel Animation */
-            .logo-carousel-container {
-                position: relative;
-                width: 100%;
+        .logo-carousel-container {
+            position: relative;
+            width: 100%;
         }
 
-            .logo-carousel {
+        .logo-carousel {
             display: flex;
             animation: scroll-logos 22s linear infinite;
             will-change: transform;
         }
 
-            .logo-carousel:hover {
-             animation-play-state: paused;
+        .logo-carousel:hover {
+            animation-play-state: paused;
         }
 
         @keyframes scroll-logos {
-        0% {
-        transform: translateX(0);
-            }
-        100% {
-        transform: translateX(-50%);
-            }
+            0% {
+            transform: translateX(0);
+        }
+            100% {
+            transform: translateX(-50%);
+         }
         }
 
-        .logo-item {
-        opacity: 0.4;
-        filter: grayscale(100%);
-        transition: all 0.3s ease;
-        }
+.logo-item {
+    opacity: 0.9;
+    filter: grayscale(100%);
+    transition: all 0.3s ease;
+}
 
-        .logo-item:hover {
-            opacity: 0.7;
-            filter: grayscale(0%);
-        }
+.logo-item:hover {
+    opacity: 0.9;
+    filter: grayscale(0%);
+}
 
     </style>
 </head>
